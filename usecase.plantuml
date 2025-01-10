@@ -1,0 +1,45 @@
+@startuml
+!theme spacelab
+
+
+
+node NextJS_App {
+
+  package "preferences" as set{
+    interface [Diet Restrictions] as dr
+  }
+  package "scanner" as scn{
+    interface [openCV] as cv
+    interface [Url Input] as ui
+
+  }
+  package "inventory" as inv{
+    interface [recipes] as rcp
+    interface k_nearest
+    interface [pantry] as pnt
+  }
+  interface recommender
+  [Web Requests] as wr
+
+}
+
+node Cloud_Server {
+  database "Postgres" as DB
+  interface [Ingredients] as t1
+  interface [Recipes] as t2
+  interface [UserData] as t3
+}
+
+k_nearest --> recommender
+
+dr  ..>recommender
+pnt --> k_nearest
+rcp -->k_nearest
+cv -->  wr: "barcode_id"
+ui -->  wr: "recipe_url"
+wr -right-> inv
+inv <..> DB
+DB --> t1
+DB --> t2
+DB --> t3
+@enduml
