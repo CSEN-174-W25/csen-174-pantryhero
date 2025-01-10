@@ -1,5 +1,10 @@
 # csen-174-pantryhero
-PantryHero - Rescue Your Recipes
+<div style="left">
+  PantryHero - Rescue Your Recipes
+<div>
 Yi Qian Goh
 Veronica Flores
 Lucas Amlicke
+</div>
+ 
+</div>
