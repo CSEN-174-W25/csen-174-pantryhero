@@ -7,7 +7,21 @@ Veronica Flores
 Lucas Amlicke
 </div>
 </div>
+# Getting started(for devs)
 
+## how to work CI/CD
+1. pick a ticket
+2. on the ticket page click  "create a branch"
+3. run `yarn format && yarn test` to check your code
+4. create a Pull Request for your branch
+5. After your PR passes all the tests, merge your branch into main
+
+## prerequisites
+- install yarn, npm
+
+
+
+# About the Product
 ## Features
 - **User Preferences**
 - **Barcode Scanner**
