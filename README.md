@@ -10,15 +10,14 @@ Lucas Amlicke
 
 ## Features
 - **User Preferences**
-- **Barcode Scan**
+- **Barcode Scanner**
 - **Expiration date scan**
 - **Recipe Get**
 - **Recipe Recommendations**
 
 ##  Tech Stacks
 - **webapp framework** next.js
-- **barcode package** zbar
-- **camera package** [CameraKit-js](https://github.com/CameraKit/camerakit-js)
-- **video processing** [openCV.js](https://docs.opencv.org/4.x/d5/d10/tutorial_js_root.html)
-- **database** [postgres](https://github.com/porsager/postgres)
+- **barcode scanner** [zxing-react](https://stackblitz.com/edit/zxing-scanner-react?file=index.js)
+- **database** [postgres-neon](https://neon.tech/docs/guides/react)
+- **natural language agent** [RAG query](https://neon.tech/docs/extensions/pgrag)
 - **recommendation system** [k-nearest neighbor](https://dev.to/eerk/creating-a-recommender-system-in-10-lines-of-javascript-2409)
