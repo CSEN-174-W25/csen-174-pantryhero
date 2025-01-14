@@ -1,0 +1,21 @@
+@startuml
+
+actor User
+"User login" as (uc001)
+"Input User Preferences" as (uc002)
+"Pantry view" as (uc003)
+"Barcode scanner" as (uc004)
+"Recipe import" as (uc005)
+"Cookbook view" as (uc006)
+"Home view" as (uc007)
+"Recommendation Feed" as (uc008)
+
+User-right->uc001
+uc007-down->uc002
+uc007-up->uc003
+uc003->uc004
+uc006->uc005
+uc007->uc006
+uc001->uc007
+uc007-down->uc008
+@enduml
