@@ -9,6 +9,8 @@ Lucas Amlicke
 </div>
 # Getting started(for devs)
 
+## getting started
+1. cd into /pantryhero and run `yarn install`
 ## how to work CI/CD
 1. pick a ticket
 2. on the ticket page click  "create a branch"
