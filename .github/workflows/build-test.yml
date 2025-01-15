@@ -5,10 +5,12 @@ on:
     branches:  
       - main  
 jobs:  
+
   build:  
     runs-on: ubuntu-latest  
     name: build-action  
     steps:
+      - run: cd pantryhero
       - uses: actions/checkout@v3
 
       - name: Set Node.js 16.x
