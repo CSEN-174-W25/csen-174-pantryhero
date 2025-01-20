@@ -1,6 +1,6 @@
 import Tableview from "@/components/tableview";
 import { PrismaClient } from "@prisma/client";
-
+import {BarcodeScanner} from  "@/components/zxing";
 const prisma = new PrismaClient();
 
 export default async function Home() {
@@ -12,15 +12,10 @@ export default async function Home() {
     }));
 
     return (
-      <div
-        style={{
-          maxWidth: 1280,
-          margin: "0 auto",
-          padding: "2rem",
-          textAlign: "center",
-        }}
+      <div class="mx-auto container grid-cols-2"
       >
         <h1>Pantry Hero</h1>
+        <BarcodeScanner/> 
         <Tableview food={formattedFood} />
       </div>
     );
@@ -28,4 +23,3 @@ export default async function Home() {
     console.error("Error fetching data:", error);
     return <div>Error loading data</div>;
   }
-}

@@ -5,6 +5,7 @@ on:
     branches:  
       - main  
 jobs:  
+
   build:  
     runs-on: ubuntu-latest  
     name: build-action  
@@ -19,20 +20,26 @@ jobs:
       - name: Run install
         uses: borales/actions-yarn@v4
         with:
+          dir: 'pantryhero'
           cmd: install # will run `yarn install` command
+          dir: 'pantryhero'
         # env:
         #   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # if needed
       - name: Build production bundle
         uses: borales/actions-yarn@v4
         with:
+          dir: 'pantryhero'
           cmd: build:prod # will run `yarn build:prod` command
+          dir: 'pantryhero'
       - name: Test the app
         uses: borales/actions-yarn@v4
         with:
+          dir: 'pantryhero'
           cmd: test # will run `yarn test` command
+          dir: 'pantryhero'
 
       - name: Run test in sub-folder
         uses: borales/actions-yarn@v4
         with:
           cmd: test
-          dir: 'frontend' # will run `yarn test` in `frontend` sub folder
+          dir: 'pantryhero'
