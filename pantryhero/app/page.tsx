@@ -1,14 +1,10 @@
+import {BarcodeScanner} from  "@/components/zxing";
 export default function Home() {
   return (
-    <div
-      style={{
-        maxWidth: 1280,
-        margin: '0 auto',
-        padding: '2rem',
-        textAlign: 'center',
-      }}
+    <div class="mx-auto container grid-cols-2"
     >
      Pantry Hero
+     {/* <BarcodeScanner/> */}
     </div>
   );
 }
