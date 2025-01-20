@@ -20,6 +20,7 @@ jobs:
       - name: Run install
         uses: borales/actions-yarn@v4
         with:
+          dir: 'pantryhero'
           cmd: install # will run `yarn install` command
           dir: 'pantryhero'
         # env:
@@ -27,11 +28,13 @@ jobs:
       - name: Build production bundle
         uses: borales/actions-yarn@v4
         with:
+          dir: 'pantryhero'
           cmd: build:prod # will run `yarn build:prod` command
           dir: 'pantryhero'
       - name: Test the app
         uses: borales/actions-yarn@v4
         with:
+          dir: 'pantryhero'
           cmd: test # will run `yarn test` command
           dir: 'pantryhero'
 
