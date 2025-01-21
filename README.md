@@ -7,16 +7,23 @@ Veronica Flores
 Lucas Amlicke
 </div>
 </div>
-# Getting started(for devs)
 
 ## getting started
 1. cd into /pantryhero and run `yarn install`
-## how to work CI/CD
-1. pick a ticket
-2. on the ticket page click  "create a branch"
-3. run `yarn format && yarn test` to check your code
-4. create a Pull Request for your branch
-5. After your PR passes all the tests, merge your branch into main
+2. check package.json to find all the scripts to develop(start with 'yarn dev')
+2. please do not commit to main, Only use PRs (more in the CI/CD section)
+
+## tech stack
+**Jest**: For testing the Next.js components
+**Prisma**: For interacting with the database(try the prisma cmds in paackage.json)
+**Supabase**: For storing data in the cloud
+
+## how to commit work with CI/CD
+1. go to the github project page -> pick a ticket
+2. on the right side ticket page click  "create a branch" -> "use Github Desktop"
+3. run `yarn test` to check your code
+4. create a Pull Request for your branch(PLEASE WRITE A SHORT DESC OF CHANGES)
+5. After your PR passes all the tests on github, merge your branch into main
 
 ## prerequisites
 - install yarn, npm

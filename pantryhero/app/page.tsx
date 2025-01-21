@@ -12,7 +12,7 @@ export default async function Home() {
     }));
 
     return (
-      <div class="mx-auto container grid-cols-2"
+      <div className="mx-auto container grid-cols-2"
       >
         <h1>Pantry Hero</h1>
         <BarcodeScanner/> 
@@ -23,3 +23,4 @@ export default async function Home() {
     console.error("Error fetching data:", error);
     return <div>Error loading data</div>;
   }
+}
