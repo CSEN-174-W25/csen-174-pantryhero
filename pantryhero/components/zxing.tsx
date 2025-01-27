@@ -13,7 +13,7 @@ export const BarcodeScanner = () => {
 
   return (
     <>
-    <div class="container center inline-block py-4 px-4 bg-gray-500 rounded">
+    <div className="container center inline-block py-4 px-4 bg-gray-500 rounded">
       <video ref={ref} className="size-1/2"/>
       <p>
         <span>Last result:</span>
