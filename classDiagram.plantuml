@@ -1,0 +1,40 @@
+@startuml
+
+class UserData {
+    + ID: Input
+    + Username: string
+    + Diet: Enum 
+    + Email: string
+    + Password: string
+}
+
+class Recipes {
+    + ID: int 
+    + Name: string
+    + URL: string
+    + Ingredients: List
+    + Rating: float
+}
+
+class Ingredients {
+    + ID: int
+    + Name: string
+    + Barcode: string
+    + Date: string
+    + Category: string
+}
+
+class CRUD {
+    + Create()
+    + Request()
+    + Update()
+    + Delete()
+}
+
+UserData "1" -- "*" Recipes : owns > 
+Recipes "1" -- "*" Ingredients : contains >
+CRUD ..> UserData
+CRUD ..> Recipes
+CRUD ..> Ingredients
+
+@enduml
