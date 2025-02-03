@@ -3,11 +3,23 @@
 import { useState } from "react";
 import { useZxing } from "react-zxing";
 
+
+const requestOptions = {
+  method: "GET"
+};
+
+async function barcodeLookup(barcode:String){
+  fetch(`https://world.openfoodfacts.org/api/v0/product/${barcode}.json`, requestOptions)
+    .then((response) => response.text())
+    .then((result) => console.log(result))
+    .catch((error) => console.error(error));
+}
 export const BarcodeScanner = () => {
   const [result, setResult] = useState("");
   const { ref } = useZxing({
     onDecodeResult(result) {
       setResult(result.getText());
+      barcodeLookup(result.getText()).then(json => console.log(json));
     },
   });
 
