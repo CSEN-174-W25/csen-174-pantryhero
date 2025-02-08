@@ -1,10 +1,14 @@
-"use client";
+import { Typography, Button } from "@mui/material"
+import Link from "next/link"
 
 export default function Home() {
   return (
-    <div className="mx-auto container bg-red-500 h-full grid-cols-2">
-      <h1>Pantry Hero</h1>     
-    
-    </div>
-  );
+    <main>
+      <Typography variant="h1">Welcome to Pantry Hero</Typography>
+      <Link href="/items" passHref>
+        <Button variant="contained">View Pantry Items</Button>
+      </Link>
+    </main>
+  )
 }
+

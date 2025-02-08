@@ -1,21 +1,24 @@
-"use client";
-import {useState} from 'react';
-import Link from 'next/link';
-import BottomNavigation from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import RestoreIcon from '@mui/icons-material/Restore';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
+import type React from "react"
+import { AppBar, Toolbar, Typography, Button } from "@mui/material"
+import Link from "next/link"
 
-const Navbar = ()  =>{
-    const [value, setValue] = useState(0);
-    return(
-    <BottomNavigation className="sticky bottom-0" showLabels value={value}
-        onChange={(event, newValue) => setValue(newValue)}>
-        <BottomNavigationAction component={Link} href="/scan" label="Scan" icon={<RestoreIcon />} />
-        <BottomNavigationAction component={Link} href="/" label="Home" icon={<FavoriteIcon />} />
-        <BottomNavigationAction component={Link} href="/pantry" label="Pantry" icon={<LocationOnIcon />} />
-      </BottomNavigation>
-    );
+const Navbar: React.FC = () => {
+  return (
+    <AppBar position="static">
+      <Toolbar>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          Pantry Hero
+        </Typography>
+        <Link href="/" passHref>
+          <Button color="inherit">Home</Button>
+        </Link>
+        <Link href="/items" passHref>
+          <Button color="inherit">Items</Button>
+        </Link>
+      </Toolbar>
+    </AppBar>
+  )
 }
-export default Navbar;
+
+export default Navbar
+
