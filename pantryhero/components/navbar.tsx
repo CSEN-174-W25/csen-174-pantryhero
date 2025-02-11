@@ -6,6 +6,7 @@ import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import RestoreIcon from '@mui/icons-material/Restore';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
 
 const Navbar = ()  =>{
     const [value, setValue] = useState(0);
@@ -15,6 +16,7 @@ const Navbar = ()  =>{
         <BottomNavigationAction component={Link} href="/scan" label="Scan" icon={<RestoreIcon />} />
         <BottomNavigationAction component={Link} href="/" label="Home" icon={<FavoriteIcon />} />
         <BottomNavigationAction component={Link} href="/pantry" label="Pantry" icon={<LocationOnIcon />} />
+        <BottomNavigationAction component={Link} href="/cookbook" label="Cookbook" icon={<MenuBookIcon />} />
       </BottomNavigation>
     );
 }
