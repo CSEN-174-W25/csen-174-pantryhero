@@ -1,7 +1,9 @@
 "use client";
 import * as React from "react";
 import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
-import { Restore as RestoreIcon, Favorite as FavoriteIcon, LocationOn as LocationOnIcon } from "@mui/icons-material";
+import HomeIcon from '@mui/icons-material/Home';
+import CropFreeIcon from '@mui/icons-material/CropFree';
+import KitchenIcon from '@mui/icons-material/Kitchen';
 import Link from "next/link";
 
 export default function Navbar() {
@@ -18,13 +20,21 @@ export default function Navbar() {
         }}
       >
         <BottomNavigationAction
-          label="Recents"
-          icon={<RestoreIcon />}
+          label="Scan"
+          icon={<CropFreeIcon/>}
           component={Link}
-          href="/pantry"
+          href="/scan"
         />
-        <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-        <BottomNavigationAction label="Archive" icon={<LocationOnIcon />} />
+        <BottomNavigationAction 
+        label="Home" 
+        icon={<HomeIcon/>} 
+        component={Link}
+        href="/"/>
+        <BottomNavigationAction 
+        label="Pantry" 
+        icon={<KitchenIcon/>} 
+        component={Link}
+        href="/pantry"/>
       </BottomNavigation>
     </Paper>
   );
