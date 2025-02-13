@@ -70,8 +70,9 @@ export const BarcodeScanner = () => {
     <div className="container center inline-block py-4 px-4 bg-gray-500 rounded">
       <video
         ref={ref}
+        data-testid="barcode-video" // Add this line
         className="size-1/2"
-        style={{ width: "100%", height: "300px", border: "1px solid black" }}
+        style={{ width: '100%', height: '300px', border: '1px solid black' }}
       />
       {result ? (
         <div>

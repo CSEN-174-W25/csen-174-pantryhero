@@ -10,24 +10,24 @@ describe("Navbar", () => {
     expect(screen.getByRole("navigation")).toBeInTheDocument();
 
     // Check if the navigation links are rendered
-    expect(screen.getByRole("link", { name: "Recents" })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Favorites" })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Archive" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Scan" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Home" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Pantry" })).toBeInTheDocument();
   });
 
   it("updates the active navigation link", () => {
     render(<Navbar />);
 
     // Check the initial active link
-    const recentsLink = screen.getByRole("link", { name: "Recents" });
-    expect(recentsLink).toBeInTheDocument();
+    const ScanLink = screen.getByRole("link", { name: "Scan" });
+    expect(ScanLink).toBeInTheDocument();
 
-    // Click on the "Favorites" link
-    const favoritesButton = screen.getByRole("button", { name: "Favorites" });
-    fireEvent.click(favoritesButton);
+    // Click on the "Home" link
+    const HomeButton = screen.getByRole("link", { name: "Home" });
+    fireEvent.click(HomeButton);
 
-    // Check if the "Favorites" link is now active
-    expect(favoritesButton).toHaveClass("Mui-selected");
-    expect(recentsLink).not.toHaveClass("Mui-selected");
+    // Check if the "Home" link is now active
+    expect(HomeButton).toHaveClass("Mui-selected");
+    expect(ScanLink).not.toHaveClass("Mui-selected");
   });
 });
