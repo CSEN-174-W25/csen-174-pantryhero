@@ -20,26 +20,25 @@ jobs:
       - name: Run install
         uses: borales/actions-yarn@v4
         with:
-          dir: 'pantryhero'
+          dir: 'pantry-hero'
           cmd: install # will run `yarn install` command
-          dir: 'pantryhero'
+          dir: 'pantry-hero'
         # env:
         #   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # if needed
       - name: Build production bundle
         uses: borales/actions-yarn@v4
         with:
-          dir: 'pantryhero'
-          cmd: build:prod # will run `yarn build:prod` command
-          dir: 'pantryhero'
+          dir: 'pantry-hero'
+          cmd: build # will run `yarn build:prod` command
+          dir: 'pantry-hero'
       - name: Test the app
         uses: borales/actions-yarn@v4
         with:
-          dir: 'pantryhero'
+          dir: 'pantry-hero'
           cmd: test # will run `yarn test` command
-          dir: 'pantryhero'
 
       - name: Run test in sub-folder
         uses: borales/actions-yarn@v4
         with:
           cmd: test
-          dir: 'pantryhero'
+          dir: 'pantry-hero'
