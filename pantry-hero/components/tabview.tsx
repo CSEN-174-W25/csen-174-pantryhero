@@ -3,7 +3,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-
+import Gallery from '@/components/galleryview';
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
@@ -37,7 +37,7 @@ function a11yProps(index: number) {
   };
 }
 
-export default function VerticalTabs() {
+export default function VerticalTabs({food}:any) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -65,7 +65,7 @@ export default function VerticalTabs() {
         <Tab label="Item Seven" {...a11yProps(6)} />
       </Tabs>
       <TabPanel value={value} index={0}>
-        Item One
+        <Gallery food={food}/>
       </TabPanel>
       <TabPanel value={value} index={1}>
         Item Two
