@@ -1,32 +1,26 @@
+//cookbook code is incomplete for now! Just a temporary template for what
+//the code might look like.
+
 "use client";
-import React, {useState} from 'react';
-import prisma from '@/lib/prisma';
-import { Box, Button, Container, TextField, Typography } from "@mui/material";
+import { useState, useEffect } from 'react';
+import { Box, Container, Typography, List, ListItem, ListItemText } from "@mui/material";
 
-const AddRecipePage: React.FC = () => {
-    const [url, setUrl] = useState('');
-    const [message, setMessage] = useState('');
+export default function Cookbook() {
+  const [recipes, setRecipes] = useState([]);
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        try {
-            await fetch('/api/recipe', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({url}),
-            });
-            setMessage('Recipe URL added successfully');
-            setUrl('');
-        } catch (error) {
-            setMessage('Error: ${error.message}');
-        }
-    };
+  useEffect(() => {
+    async function fetchRecipes() {
+      const res = await fetch('/api/recipes');
+      const data = await res.json();
+      //data.sort((a, b) => a.name.localeCompare(b.name)); //Sort recipes alphabetically
+      setRecipes(data);
+    }
+    fetchRecipes();
+  }, []);
 
-    return (
-        <Container
-      maxWidth="sm"
+  return (
+    <Container
+      maxWidth="md"
       sx={{
         display: "flex",
         flexDirection: "column",
@@ -38,43 +32,17 @@ const AddRecipePage: React.FC = () => {
       }}
     >
       <Typography variant="h4" component="h1" gutterBottom>
-        Add a Recipe to Your Cookbook
+        Cookbook
       </Typography>
-      <Box
-        component="form"
-        onSubmit={handleSubmit}
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: 2,
-          width: "100%",
-        }}
-      >
-        <TextField
-          type="url"
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-          placeholder="Enter recipe URL"
-          required
-          fullWidth
-          label="Recipe URL"
-          variant="outlined"
-        />
-        <Button type="submit" variant="contained" color="primary" fullWidth>
-          Add Recipe
-        </Button>
-      </Box>
-      {message && (
-        <Typography
-          variant="body1"
-          color={message.startsWith("Error") ? "error" : "success"}
-          sx={{ marginTop: 2 }}
-        >
-          {message}
-        </Typography>
-      )}
+      {/* <Box sx={{ width: "100%", marginBottom: 4 }}>
+        <List>
+          {recipes.map((recipe) => (
+            <ListItem key={recipe.id}>
+              <ListItemText primary={recipe.name} secondary={recipe.description} />
+            </ListItem>
+          ))}
+        </List>
+      </Box> */}
     </Container>
   );
-};
-
-export default AddRecipePage;
+}
