@@ -1,22 +1,31 @@
-import {NextApiRequest, NextApiResponse} from 'next'
-import prisma from '@/lib/prisma'
+import prisma from "@/lib/prisma";
+import { NextResponse } from 'next/server';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    if (req.method === 'POST') {
-        const {url} = req.body;
-        try {
-            const newRecipe = await prisma.recipes.create({
-                data: {
-                    url,
-                    created_at: new Date(),
-                },
-            });
-            res.status(200).json(newRecipe);
-        } catch (error) {
-            res.status(500).json({Error: 'Error adding recipe'});
-        }
-    } else {
-        res.setHeader('Allow', ['POST']);
-        res.status(45).end(`Method ${req.method} Not Allowed`);
-    }
+export async function GET() {
+  const recipes = await prisma.recipes.findMany();
+  const serializedRecipes = recipes.map(item => ({
+    ...item,
+    id: item.id.toString(), // Convert BigInt to string
+  }));
+
+  return NextResponse.json({ recipes: serializedRecipes }, { status: 200 });
+}
+
+export async function POST(req: Request) {
+  const { url } = await req.json();
+  if (!url) return new Response("URL is required", { status: 400 });
+
+  const newRecipe = await prisma.recipes.create({
+    data: {
+      url,
+      created_at: new Date(),
+    },
+  });
+
+  const serializedRecipe = {
+    ...newRecipe,
+    id: newRecipe.id.toString(), // Convert BigInt to string
+  };
+
+  return new Response(JSON.stringify(serializedRecipe), { status: 201 });
 }
