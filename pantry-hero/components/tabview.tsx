@@ -43,7 +43,7 @@ export default function VerticalTabs({food}:any) {
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
-
+  const food2={food:[{name:"Milk Bread",quantity:1}, {name:"Spaghetti",quantity:1}, {name:"Oatmeal",quantity:1}]}
   return (
     <Box
       sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 224 }}
@@ -56,19 +56,19 @@ export default function VerticalTabs({food}:any) {
         aria-label="Vertical tabs example"
         sx={{ borderRight: 1, borderColor: 'divider' }}
       >
-        <Tab label="Item One" {...a11yProps(0)} />
-        <Tab label="Item Two" {...a11yProps(1)} />
-        <Tab label="Item Three" {...a11yProps(2)} />
-        <Tab label="Item Four" {...a11yProps(3)} />
-        <Tab label="Item Five" {...a11yProps(4)} />
-        <Tab label="Item Six" {...a11yProps(5)} />
+        <Tab label="Produce" {...a11yProps(0)} />
+        <Tab label="Grains" {...a11yProps(1)} />
+        <Tab label="Protein" {...a11yProps(2)} />
+        <Tab label="Vegetables" {...a11yProps(3)} />
+        <Tab label="Fruit" {...a11yProps(4)} />
+        <Tab label="Condiments" {...a11yProps(5)} />
         <Tab label="Item Seven" {...a11yProps(6)} />
       </Tabs>
       <TabPanel value={value} index={0}>
         <Gallery food={food}/>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        <Gallery food={food2}/>
       </TabPanel>
       <TabPanel value={value} index={2}>
         Item Three

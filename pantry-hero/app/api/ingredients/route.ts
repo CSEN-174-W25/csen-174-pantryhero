@@ -15,16 +15,16 @@ export async function GET() {
 }
 
 export async function POST(req:Request) {
-  const { name, barcode } = await req.json();
-
-  if (!name) return Response("Name is required", { status: 400 });
+  const { name, barcode, quantity } = await req.json();
+  if (!name) return new Response("Name is required", { status: 400 });
 
   const newIngredient = await prisma.ingredients.create({
     data: {
       name,
       barcode,
+      quantity
     },
   });
 
-  return Response(JSON.stringify(newIngredient), { status: 201 });
+  return new Response({message:`saved ${name}x${quantity}`}, { status: 201 });
 }

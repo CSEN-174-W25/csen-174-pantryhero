@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useZxing } from "react-zxing";
-
+import { Typography, Button } from "@mui/material"
 const requestOptions = {
   method: "GET",
 };
@@ -22,7 +22,9 @@ async function barcodeLookup(barcode: string): Promise<any> {
       return null; // Return null in case of an error
     }
   }
+
   
+
 export const BarcodeScanner = () => {
   const [result, setResult] = useState<{
     keywords?: string[];
@@ -32,6 +34,20 @@ export const BarcodeScanner = () => {
     allergens?: string;
     status?: string;
   } | null>(null); // Initialize state as null
+
+  const handleAdd = async () => {
+    const newFood = {
+      name: result.name,
+      barcode: "000",
+      quantity: "1"
+    }
+    const res = await fetch('/api/ingredients', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newFood),
+    });
+
+  };
 
   const { ref } = useZxing({
     onDecodeResult(decodedResult) {
@@ -95,6 +111,16 @@ export const BarcodeScanner = () => {
           <p>
             <strong>Keywords:</strong> {result.keywords?.join(", ")}
           </p>
+          <Button 
+          onClick={handleAdd}
+          variant="contained"
+          color="primary"
+          fullWidth
+          >
+          Add Food
+          </Button>
+          
+          
         </div>
       ) : (
         <p>No product data available. Scan a barcode to get started.</p>
