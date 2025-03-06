@@ -89,20 +89,27 @@ export default function RecipePage() {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 3,
+    slidesToShow: 4,
+    slidesToScroll: 4,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 3,
+          slidesToScroll: 3,
           infinite: true,
           dots: true
         }
       },
       {
         breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2
+        }
+      },
+      {
+        breakpoint: 480,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1
@@ -117,23 +124,23 @@ export default function RecipePage() {
         Browsing Recipes
       </Typography>
       {CATEGORIES.map((category) => (
-        <Box key={category} sx={{ marginBottom: 3 }}>
-          <Typography variant="h5" sx={{ fontWeight: 'bold', marginBottom: 2 }}>
+        <Box key={category} sx={{ marginBottom: 2 }}>
+          <Typography variant="h5" sx={{ fontWeight: 'bold', marginBottom: 1 }}>
             {category}
           </Typography>
           <Slider {...settings}>
             {recipesByCategory[category]?.map((recipe) => (
-              <Box key={recipe.idMeal} sx={{ padding: 1 }}>
+              <Box key={recipe.idMeal} sx={{ padding: 0.5 }}>
                 <Link href={`/recipe/${recipe.idMeal}`} passHref>
-                  <Card sx={{ display: 'flex', flexDirection: 'column', padding: 2 }}>
+                  <Card sx={{ display: 'flex', flexDirection: 'column', padding: 1, maxWidth: 200 }}>
                     <CardContent>
-                      <Typography variant="h6">{recipe.strMeal}</Typography>
+                      <Typography variant="h6" sx={{ fontSize: '1rem' }}>{recipe.strMeal}</Typography>
                       <img src={recipe.strMealThumb} alt={recipe.strMeal} style={{ width: '100%', height: 'auto' }} />
-                      <Typography variant="body2" sx={{ marginTop: 1 }}>
+                      <Typography variant="body2" sx={{ marginTop: 1, fontSize: '0.875rem' }}>
                         {recipe.strInstructions ? recipe.strInstructions.slice(0, 100) : 'No instructions available'}...
                       </Typography>
-                      <Chip label={category} color="primary" size="small" sx={{ marginTop: 1 }} />
                       <Box sx={{ display: 'flex', flexWrap: 'wrap', marginTop: 1 }}>
+                        <Chip label={category} color="primary" size="small" sx={{ marginRight: 0.5, marginBottom: 0.5 }} />
                         {recipe.ingredients.filter(ingredient => pantryIngredients.includes(ingredient)).map((ingredient, index) => (
                           <Chip key={index} label={ingredient} color="secondary" size="small" sx={{ marginRight: 0.5, marginBottom: 0.5 }} />
                         ))}
