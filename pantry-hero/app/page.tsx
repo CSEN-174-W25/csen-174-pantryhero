@@ -14,6 +14,7 @@ interface Recipe {
   strMeal: string;
   strMealThumb: string;
   strInstructions: string;
+  ingredients: string[];
 }
 
 const fetchRecipes = async (category: string): Promise<Recipe[]> => {
@@ -30,20 +31,41 @@ const fetchRecipes = async (category: string): Promise<Recipe[]> => {
 const fetchRecipeDetails = async (idMeal: string): Promise<Recipe | null> => {
   try {
     const res = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idMeal}`);
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
     const data = await res.json();
-    return data.meals ? data.meals[0] : null;
+    if (data.meals) {
+      const meal = data.meals[0];
+      const ingredients = [];
+      for (let i = 1; i <= 20; i++) {
+        const ingredient = meal[`strIngredient${i}`];
+        if (ingredient) ingredients.push(ingredient);
+      }
+      return { ...meal, ingredients };
+    }
+    return null;
   } catch (error) {
     console.error(`Failed to fetch recipe details for meal ID ${idMeal}:`, error);
     return null;
   }
 };
 
+const fetchPantryIngredients = async (): Promise<string[]> => {
+  // Replace with your actual API call to fetch pantry ingredients
+  return ['Chicken', 'Rice', 'Tomato', 'Onion'];
+};
+
 export default function RecipePage() {
   const [recipesByCategory, setRecipesByCategory] = useState<{ [key: string]: Recipe[] }>({});
   const [loading, setLoading] = useState(true);
+  const [pantryIngredients, setPantryIngredients] = useState<string[]>([]);
 
   useEffect(() => {
     const loadRecipes = async () => {
+      const pantry = await fetchPantryIngredients();
+      setPantryIngredients(pantry);
+
       const recipes: { [key: string]: Recipe[] } = {};
       for (const category of CATEGORIES) {
         const categoryRecipes = await fetchRecipes(category);
@@ -90,7 +112,7 @@ export default function RecipePage() {
   };
 
   return (
-    <Box sx={{ padding: 3 }}>
+    <Box sx={{ padding: 3, paddingBottom: 10 }}>
       <Typography variant="h4" sx={{ fontWeight: 'bold', textAlign: 'center', marginBottom: 2 }}>
         Browsing Recipes
       </Typography>
@@ -111,6 +133,11 @@ export default function RecipePage() {
                         {recipe.strInstructions ? recipe.strInstructions.slice(0, 100) : 'No instructions available'}...
                       </Typography>
                       <Chip label={category} color="primary" size="small" sx={{ marginTop: 1 }} />
+                      <Box sx={{ display: 'flex', flexWrap: 'wrap', marginTop: 1 }}>
+                        {recipe.ingredients.filter(ingredient => pantryIngredients.includes(ingredient)).map((ingredient, index) => (
+                          <Chip key={index} label={ingredient} color="secondary" size="small" sx={{ marginRight: 0.5, marginBottom: 0.5 }} />
+                        ))}
+                      </Box>
                     </CardContent>
                   </Card>
                 </Link>

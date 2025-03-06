@@ -20,7 +20,7 @@ export default function Navbar() {
   const [value, setValue] = React.useState(1);
 
   return (
-    <Paper style={{ position: "fixed", bottom: 0, left: 0, right: 0 }} elevation={3}>
+    <Paper style={{ position: "fixed", bottom: 0, left: 0, right: 0, backgroundColor: '#4caf50' }} elevation={3}>
       <BottomNavigation
         showLabels
         role="navigation"
@@ -28,24 +28,55 @@ export default function Navbar() {
         onChange={(event, newValue) => {
           setValue(newValue);
         }}
+        sx={{ backgroundColor: '#4caf50', color: '#ffffff' }}
       >
         <BottomNavigationAction 
-        label="Pantry" 
-        icon={<KitchenIcon/>} 
-        component={Link}
-        href="/pantry"/>
+          label="Pantry" 
+          icon={<KitchenIcon sx={{ color: '#ffffff' }} />} 
+          component={Link}
+          href="/pantry"
+          sx={{
+            color: '#ffffff',
+            '&.Mui-selected': {
+              color: '#ffffff',
+            },
+            '&:hover': {
+              color: '#388e3c',
+            },
+          }}
+        />
 
         <BottomNavigationAction 
-        label="Home" 
-        icon={<HomeIcon/>} 
-        component={Link}
-        href="/"/>
+          label="Home" 
+          icon={<HomeIcon sx={{ color: '#ffffff' }} />} 
+          component={Link}
+          href="/"
+          sx={{
+            color: '#ffffff',
+            '&.Mui-selected': {
+              color: '#ffffff',
+            },
+            '&:hover': {
+              color: '#388e3c',
+            },
+          }}
+        />
         
         <BottomNavigationAction
-        label="Cookbook"
-        icon={<MenuBookIcon/>}
-        component={Link}
-        href="/cookbook"/>
+          label="Cookbook"
+          icon={<MenuBookIcon sx={{ color: '#ffffff' }} />}
+          component={Link}
+          href="/cookbook"
+          sx={{
+            color: '#ffffff',
+            '&.Mui-selected': {
+              color: '#ffffff',
+            },
+            '&:hover': {
+              color: '#388e3c',
+            },
+          }}
+        />
       </BottomNavigation>
       
       <SpeedDial
@@ -58,7 +89,8 @@ export default function Navbar() {
             key={action.name}
             icon={action.icon}
             onClick={() => window.location.href = action.href}
-            tooltipTitle={action.name}/>
+            tooltipTitle={action.name}
+          />
         ))}
       </SpeedDial>
     </Paper>
