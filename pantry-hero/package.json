@@ -27,7 +27,9 @@
     "next": "15.1.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-zxing": "^2.0.2"
+    "react-slick": "^0.30.3",
+    "react-zxing": "^2.0.2",
+    "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

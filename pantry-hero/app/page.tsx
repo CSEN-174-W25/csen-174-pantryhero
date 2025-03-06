@@ -1,122 +1,124 @@
-import { Typography, Button } from "@mui/material"
-import Link from "next/link"
-import { Box, Card, CardContent, Grid, Rating, Chip } from "@mui/material";
+"use client";
+
+import { useEffect, useState } from 'react';
+import { Box, Card, CardContent, Typography, Chip, CircularProgress } from '@mui/material';
+import Link from 'next/link';
+import Slider from 'react-slick';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+const CATEGORIES = ['Vegan', 'Seafood', 'Dessert'];
 
 interface Recipe {
-  id: number;
-  title: string;
-  description: string;
-  timeEstimate: string; // e.g., "30 mins"
-  ingredients: string[]; // List of ingredients for the recipe
+  idMeal: string;
+  strMeal: string;
+  strMealThumb: string;
+  strInstructions: string;
 }
 
-const recipes: Recipe[] = [
-  {
-    id: 1,
-    title: "Spaghetti Bolognese",
-    description: "A classic Italian pasta dish.",
-    timeEstimate: "30 mins",
-    ingredients: ["Pasta", "Tomato Sauce", "Ground Beef"],
-  },
-  {
-    id: 2,
-    title: "Chicken Curry",
-    description: "A flavorful and spicy curry.",
-    timeEstimate: "45 mins",
-    ingredients: ["Chicken", "Curry Powder", "Coconut Milk"],
-  },
-  {
-    id: 3,
-    title: "Vegetable Stir Fry",
-    description: "A quick and healthy stir fry.",
-    timeEstimate: "20 mins",
-    ingredients: ["Broccoli", "Carrots", "Soy Sauce"],
-  },
-  {
-    id: 4,
-    title: "Beef Tacos",
-    description: "Delicious tacos with seasoned beef.",
-    timeEstimate: "25 mins",
-    ingredients: ["Tortillas", "Ground Beef", "Cheese"],
-  },
-  {
-    id: 5,
-    title: "Caesar Salad",
-    description: "A fresh and crunchy salad.",
-    timeEstimate: "15 mins",
-    ingredients: ["Lettuce", "Croutons", "Caesar Dressing"],
-  },
-];
+const fetchRecipes = async (category: string): Promise<Recipe[]> => {
+  try {
+    const res = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
+    const data = await res.json();
+    return data.meals || [];
+  } catch (error) {
+    console.error(`Failed to fetch recipes for category ${category}:`, error);
+    return [];
+  }
+};
 
-export default function Home() {
+const fetchRecipeDetails = async (idMeal: string): Promise<Recipe | null> => {
+  try {
+    const res = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idMeal}`);
+    const data = await res.json();
+    return data.meals ? data.meals[0] : null;
+  } catch (error) {
+    console.error(`Failed to fetch recipe details for meal ID ${idMeal}:`, error);
+    return null;
+  }
+};
+
+export default function RecipePage() {
+  const [recipesByCategory, setRecipesByCategory] = useState<{ [key: string]: Recipe[] }>({});
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadRecipes = async () => {
+      const recipes: { [key: string]: Recipe[] } = {};
+      for (const category of CATEGORIES) {
+        const categoryRecipes = await fetchRecipes(category);
+        const detailedRecipes = await Promise.all(
+          categoryRecipes.map(async (recipe) => {
+            const details = await fetchRecipeDetails(recipe.idMeal);
+            return details ? details : recipe;
+          })
+        );
+        recipes[category] = detailedRecipes;
+      }
+      setRecipesByCategory(recipes);
+      setLoading(false);
+    };
+    loadRecipes();
+  }, []);
+
+  if (loading) return <CircularProgress />;
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 3,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  };
+
   return (
-    <div>
-      <Box
-        sx={{
-          backgroundColor: "#3f51b5", // Primary color for the header
-          color: "#ffffff", // White text
-          padding: 2,
-          borderTopLeftRadius: "8px",
-          borderTopRightRadius: "8px",
-          boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)", // Slight shadow for depth
-          textAlign: "center",
-        }}
-      >
-        <Typography variant="h3" sx={{ fontWeight: "bold" }}>
-          Recommended Recipes:
-        </Typography>
-      </Box>
-      <Box sx={{ padding: 2 }}>
-        {recipes.map((recipe) => (
-          <Card
-            key={recipe.id}
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              marginBottom: 2,
-              padding: 2,
-              backgroundColor: "#ffffff",
-              boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)",
-            }}
-          >
-            <CardContent>
-              {/* Recipe Title and Description */}
-              <Typography variant="h6" component="div">
-                {recipe.title}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {recipe.description}
-              </Typography>
-
-              {/* Ingredients Section */}
-              <Box sx={{ marginTop: 2 }}>
-                <Typography variant="body2" sx={{ fontWeight: "bold", marginBottom: 1 }}>
-                  Based on ingredients you have:
-                </Typography>
-                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
-                  {recipe.ingredients.map((ingredient, index) => (
-                    <Chip key={index} label={ingredient} color="primary" size="small" />
-                  ))}
-                </Box>
+    <Box sx={{ padding: 3 }}>
+      <Typography variant="h4" sx={{ fontWeight: 'bold', textAlign: 'center', marginBottom: 2 }}>
+        Browsing Recipes
+      </Typography>
+      {CATEGORIES.map((category) => (
+        <Box key={category} sx={{ marginBottom: 3 }}>
+          <Typography variant="h5" sx={{ fontWeight: 'bold', marginBottom: 2 }}>
+            {category}
+          </Typography>
+          <Slider {...settings}>
+            {recipesByCategory[category]?.map((recipe) => (
+              <Box key={recipe.idMeal} sx={{ padding: 1 }}>
+                <Link href={`/recipe/${recipe.idMeal}`} passHref>
+                  <Card sx={{ display: 'flex', flexDirection: 'column', padding: 2 }}>
+                    <CardContent>
+                      <Typography variant="h6">{recipe.strMeal}</Typography>
+                      <img src={recipe.strMealThumb} alt={recipe.strMeal} style={{ width: '100%', height: 'auto' }} />
+                      <Typography variant="body2" sx={{ marginTop: 1 }}>
+                        {recipe.strInstructions ? recipe.strInstructions.slice(0, 100) : 'No instructions available'}...
+                      </Typography>
+                      <Chip label={category} color="primary" size="small" sx={{ marginTop: 1 }} />
+                    </CardContent>
+                  </Card>
+                </Link>
               </Box>
-            </CardContent>
-
-            {/* Time Estimate and Rating */}
-            <Grid container direction="row" justifyContent="space-between" alignItems="center" sx={{ marginTop: 2 }}>
-              <Typography variant="body2" color="text.secondary">
-                {recipe.timeEstimate}
-              </Typography>
-              <Rating
-                name={`rating-${recipe.id}`}
-                value={Math.floor(Math.random() * 5) + 1} // Generate a random rating between 1 and 5
-                readOnly
-                size="small"
-              />
-            </Grid>
-          </Card>
-        ))}
-      </Box>
-    </div>
-  )
+            ))}
+          </Slider>
+        </Box>
+      ))}
+    </Box>
+  );
 }
-
