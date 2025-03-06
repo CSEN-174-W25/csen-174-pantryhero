@@ -52,7 +52,7 @@ const fetchRecipeDetails = async (idMeal: string): Promise<Recipe | null> => {
 };
 
 const fetchPantryIngredients = async (): Promise<string[]> => {
-  // Replace with your actual API call to fetch pantry ingredients
+  // Replace with our actual API call to fetch pantry ingredients // test ingredients for now
   return ['Chicken', 'Rice', 'Tomato', 'Onion'];
 };
 
