@@ -131,23 +131,23 @@ export default function RecipePage() {
           <Slider {...settings}>
             {recipesByCategory[category]?.map((recipe) => (
               <Box key={recipe.idMeal} sx={{ padding: 1 }}>
-                <Link href={`/recipe/${recipe.idMeal}`} passHref>
+                {/* <Link href={`/recipe/${recipe.idMeal}`} passHref> */}
                   <Card sx={{ display: 'flex', flexDirection: 'column', padding: 2, width: 300, height: 400 }}>
-                    <CardContent sx={{ flex: '1 0 auto' }}>
-                      <Typography variant="h6" sx={{ fontSize: '1rem' }}>{recipe.strMeal}</Typography>
-                      <img src={recipe.strMealThumb} alt={recipe.strMeal} style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
-                      <Typography variant="body2" sx={{ marginTop: 1, fontSize: '0.875rem' }}>
-                        {recipe.strInstructions ? recipe.strInstructions.slice(0, 100) : 'No instructions available'}...
-                      </Typography>
-                      <Box sx={{ display: 'flex', flexWrap: 'wrap', marginTop: 1 }}>
-                        <Chip label={category} color="primary" size="small" sx={{ marginRight: 0.5, marginBottom: 0.5 }} />
-                        {recipe.ingredients.filter(ingredient => pantryIngredients.includes(ingredient)).map((ingredient, index) => (
-                          <Chip key={index} label={ingredient} color="secondary" size="small" sx={{ marginRight: 0.5, marginBottom: 0.5 }} />
-                        ))}
-                      </Box>
-                    </CardContent>
-                  </Card>
-                </Link>
+                  <CardContent sx={{ flex: '1 0 auto' }}>
+                    <Typography variant="h6" sx={{ fontSize: '1rem' }}>{recipe.strMeal}</Typography>
+                    <img src={recipe.strMealThumb} alt={recipe.strMeal} style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
+                    <Typography variant="body2" sx={{ marginTop: 1, fontSize: '0.875rem' }}>
+                      {recipe.strInstructions ? recipe.strInstructions.slice(0, 100) : 'No instructions available'}...
+                    </Typography>
+                    <Box sx={{ display: 'flex', flexWrap: 'wrap', marginTop: 1 }}>
+                      <Chip label={category} color="primary" size="small" sx={{ marginRight: 0.5, marginBottom: 0.5 }} />
+                      {recipe.ingredients.filter(ingredient => pantryIngredients.includes(ingredient)).map((ingredient, index) => (
+                        <Chip key={index} label={ingredient} color="secondary" size="small" sx={{ marginRight: 0.5, marginBottom: 0.5 }} />
+                      ))}
+                    </Box>
+                  </CardContent>
+                </Card>
+                {/* </Link> */}
               </Box>
             ))}
           </Slider>
