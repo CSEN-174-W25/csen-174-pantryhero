@@ -24,10 +24,23 @@ model user {
 }
 
 model recipes {
-  id         BigInt   @id @default(autoincrement())
-  created_at DateTime @default(now()) @db.Timestamptz(6)
-  name       String?
-  url        String?
-  rating     Int?     @db.SmallInt
-  tags       String[]
+  id                BigInt   @id @default(autoincrement())
+  created_at        DateTime @default(now()) @db.Timestamptz(6)
+  rating            Int?     @db.SmallInt
+  name              String?
+  url               String?
+  ingredients       String?
+  instructions      String?
+  description       String?
+  image             String?
+  cookTime          String?
+  totalTime         String?
+  yield             String?
+  diet              String?
+  cuisine           String?
+  category          String?
+  occasion          String?
+  utensils          String?
+  keywords          String?
+  nutritionCalories String?
 }
