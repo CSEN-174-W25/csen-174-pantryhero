@@ -126,16 +126,16 @@ export default function RecipePage() {
       {CATEGORIES.map((category) => (
         <Box key={category} sx={{ marginBottom: 2 }}>
           <Typography variant="h5" sx={{ fontWeight: 'bold', marginBottom: 1 }}>
-            {category}
+          {category}
           </Typography>
           <Slider {...settings}>
             {recipesByCategory[category]?.map((recipe) => (
-              <Box key={recipe.idMeal} sx={{ padding: 0.5 }}>
+              <Box key={recipe.idMeal} sx={{ padding: 1 }}>
                 <Link href={`/recipe/${recipe.idMeal}`} passHref>
-                  <Card sx={{ display: 'flex', flexDirection: 'column', padding: 1, maxWidth: 200 }}>
-                    <CardContent>
+                  <Card sx={{ display: 'flex', flexDirection: 'column', padding: 2, width: 300, height: 400 }}>
+                    <CardContent sx={{ flex: '1 0 auto' }}>
                       <Typography variant="h6" sx={{ fontSize: '1rem' }}>{recipe.strMeal}</Typography>
-                      <img src={recipe.strMealThumb} alt={recipe.strMeal} style={{ width: '100%', height: 'auto' }} />
+                      <img src={recipe.strMealThumb} alt={recipe.strMeal} style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
                       <Typography variant="body2" sx={{ marginTop: 1, fontSize: '0.875rem' }}>
                         {recipe.strInstructions ? recipe.strInstructions.slice(0, 100) : 'No instructions available'}...
                       </Typography>
