@@ -7,7 +7,6 @@ export async function GET() {
   ingredients.map(item =>{
     const {id} = item;
     item.id  = `${id}`;
-    console.log(item);
     return item
   })
 
