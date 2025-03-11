@@ -1,4 +1,5 @@
 "use client";
+import '../globals.css';
 import { useState, useEffect } from 'react';
 import { Box, Container, Grid, Typography, List, ListItem, ListItemText, Button } from "@mui/material";
 import Link from 'next/link';
@@ -38,23 +39,45 @@ export default function Cookbook() {
         <List>
           {recipes.map((recipe) => (
             <ListItem key={recipe.id} sx={{ marginBottom: 2 }}>
-              <Grid>
-              <img width={200} src = {recipe.image == "h"?null:recipe.image}/>
-              <Button
-                variant="contained"
-                color="primary"
-                component={Link}
-                href={`${recipe.url}`}
-              >
-                View Full Recipe
-              </Button>
+              <Grid container spacing={2} alignItems="center">
+                <Grid item>
+                  {recipe.image && recipe.image !== "h" ? (
+                    <img width={200} src={recipe.image} alt={recipe.name} />
+                  ) : (
+                    <Box
+                      sx={{
+                        width: 200,
+                        height: 150,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        backgroundColor: '#ffffff',
+                        borderRadius: 1,
+                        border: '0px solid #ccc',
+                      }}
+                    >
+                      <Typography variant="body2" color="text.secondary">
+                      </Typography>
+                    </Box>
+                  )}
+                </Grid>
+                <Grid item xs>
+                  <ListItemText
+                    primary={recipe.name}
+                    secondary={recipe.description}
+                  />
+                </Grid>
+                <Grid item>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    component={Link}
+                    href={`${recipe.url}`}
+                  >
+                    View Full Recipe
+                  </Button>
+                </Grid>
               </Grid>
-              
-              <ListItemText
-                primary={recipe.name}
-                secondary={recipe.description}
-              />
-              
             </ListItem>
           ))}
         </List>
