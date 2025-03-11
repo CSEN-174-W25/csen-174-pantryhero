@@ -50,7 +50,7 @@ export default function Recipe() {
         padding: 4,
       }}
     >
-      <Typography variant="h4" component="h1" gutterBottom sx={{ color: 'primary.main', fontWeight: 'bold' }}>
+      <Typography variant="h4" component="h1" gutterBottom sx={{ color: '#4caf50'}}>
         Add a Recipe to Your Cookbook
       </Typography>
       <Box
