@@ -43,10 +43,22 @@ export default function VerticalTabs({food}:any) {
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
-  const food2={food:[{name:"Milk Bread",quantity:1}, {name:"Spaghetti",quantity:1}, {name:"Oatmeal",quantity:1}]}
+ 
+  const shelves = ["Produce","Grains" ,"Protein" ,"Vegetables","Fruit" ,"Condiments"];
+  const foodArr = {}
+  let count = 0;
+  shelves.forEach((cat:string)=>{
+    let category = cat.toLowerCase();
+    
+    foodArr[count] = food.filter((item)=>item.category == category);
+
+    count += 1;
+  })
+  
+
   return (
     <Box
-      sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 224 }}
+      sx={{ flexGrow: 3, bgcolor: 'background.paper', display: 'flex' }}
     >
       <Tabs
         orientation="vertical"
@@ -62,29 +74,26 @@ export default function VerticalTabs({food}:any) {
         <Tab label="Vegetables" {...a11yProps(3)} />
         <Tab label="Fruit" {...a11yProps(4)} />
         <Tab label="Condiments" {...a11yProps(5)} />
-        <Tab label="Item Seven" {...a11yProps(6)} />
       </Tabs>
       <TabPanel value={value} index={0}>
-        <Gallery food={food}/>
+      <Gallery food={foodArr[0]}/>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Gallery food={food2}/>
+        <Gallery food={foodArr[1]}/>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Item Three
+      <Gallery food={foodArr[2]}/>
       </TabPanel>
       <TabPanel value={value} index={3}>
-        Item Four
+      <Gallery food={foodArr[3]}/>
       </TabPanel>
       <TabPanel value={value} index={4}>
-        Item Five
+      <Gallery food={foodArr[4]}/>
       </TabPanel>
       <TabPanel value={value} index={5}>
-        Item Six
+      <Gallery food={foodArr[5]}/>
       </TabPanel>
-      <TabPanel value={value} index={6}>
-        Item Seven
-      </TabPanel>
+
     </Box>
   );
 }

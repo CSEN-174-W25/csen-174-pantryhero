@@ -107,7 +107,7 @@ export default function Recipe() {
               variant="contained"
               color="primary"
               component={Link}
-              href={`/cookbook/${recipe.id}`}
+              href={`${recipe.url}`}
             >
               View Full Recipe
             </Button>

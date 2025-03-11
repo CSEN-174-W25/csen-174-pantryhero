@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from 'react';
-import { Box, Container, Typography, List, ListItem, ListItemText, Button } from "@mui/material";
+import { Box, Container, Grid, Typography, List, ListItem, ListItemText, Button } from "@mui/material";
 import Link from 'next/link';
 
 export default function Cookbook() {
@@ -38,18 +38,23 @@ export default function Cookbook() {
         <List>
           {recipes.map((recipe) => (
             <ListItem key={recipe.id} sx={{ marginBottom: 2 }}>
-              <ListItemText
-                primary={recipe.name}
-                secondary={recipe.description}
-              />
+              <Grid>
+              <img width={200} src = {recipe.image == "h"?null:recipe.image}/>
               <Button
                 variant="contained"
                 color="primary"
                 component={Link}
-                href={`/cookbook/${recipe.id}`}
+                href={`${recipe.url}`}
               >
                 View Full Recipe
               </Button>
+              </Grid>
+              
+              <ListItemText
+                primary={recipe.name}
+                secondary={recipe.description}
+              />
+              
             </ListItem>
           ))}
         </List>

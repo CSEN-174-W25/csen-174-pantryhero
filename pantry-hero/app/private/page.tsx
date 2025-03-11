@@ -1,8 +1,9 @@
 import { redirect } from 'next/navigation'
-
+import { Box, Container, Grid, Typography, List, ListItem, ListItemText, Button, TextField } from "@mui/material";
+import UserProfileClient from "@/components/userprofile"
 import { createClient } from '@/utils/supabase/server'
-
-export default async function PrivatePage() {
+import prisma from "@/lib/prisma";
+export default async function UserPage() {
   const supabase = await createClient()
 
   const { data, error } = await supabase.auth.getUser()
@@ -10,5 +11,17 @@ export default async function PrivatePage() {
     redirect('/login')
   }
 
-  return <p>Hello {data.user.email}</p>
+  const user = await prisma.user.findMany({
+    where: {
+      email: {
+        startsWith: `${data.user.email}`
+      },
+    },
+  });
+  console.log(user);
+  return(
+    
+      <UserProfileClient initialUser={user}/>
+
+    )
 }

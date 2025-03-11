@@ -9,8 +9,8 @@ export async function GET() {
     item.id  = `${id}`;
     return item
   })
-
-  return NextResponse.json({food:ingredients}, {status:200});
+  
+  return NextResponse.json(ingredients, {status:200});
 }
 
 export async function POST(req:Request) {

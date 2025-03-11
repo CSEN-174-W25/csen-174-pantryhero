@@ -37,7 +37,7 @@ export async function POST(req: Request) {
 
     const recipeData = result.recipe;
 
-    console.log('Fetched recipe data:', recipeData);
+    
 
     if (!recipeData.name || !recipeData.recipeIngredients || !recipeData.recipeInstructions) {
         throw new Error("Incomplete recipe data received from API");

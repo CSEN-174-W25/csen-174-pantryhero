@@ -24,7 +24,7 @@ export default function Appbar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Pantry Hero
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit" href='/private'>Settings</Button>
         </Toolbar>
       </AppBar>
     </Box>

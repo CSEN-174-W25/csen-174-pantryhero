@@ -18,18 +18,17 @@ const Item = styled(Paper)(({ theme }) => ({
 
 
 export default function Gallery({food}:any) {
-    if (!Array.isArray(food['food'])) {
+    if (!Array.isArray(food)) {
         return <div>Error: Data is unavailable.{JSON.stringify(food)}</div>;
         }
     return (
         <Box sx={{ flexGrow: 1 }}>
         <Grid2 container spacing={2}>
-            {food['food'].map((item, index) => (
+            {food.map((item, index) => (
             <Grid2 key={index} xs={12} sm={6} md={4} lg={3}>
                 <Item>
                 <h3>{item.name}</h3>
                 <p>Quantity: {item.quantity}</p>
-                {/* new Date(item.created_at).toLocaleString() */}
                 </Item>
             </Grid2>
             ))}

@@ -7,11 +7,14 @@ export const metadata: Metadata = {
   description: "rescue your recipes",
 };
 
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
+
   return (
     <html lang="en">
       <body>

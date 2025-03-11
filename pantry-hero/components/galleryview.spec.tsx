@@ -11,13 +11,12 @@ describe('Gallery Component', () => {
   });
 
   it('renders the correct number of food items', () => {
-    const mockFoodData = {
-      food: [
+    const mockFoodData = 
+      [
         { name: 'Apple', quantity: 10 },
         { name: 'Banana', quantity: 5 },
         { name: 'Orange', quantity: 8 },
-      ],
-    };
+      ];
     render(<Gallery food={mockFoodData} />);
     const foodItems = screen.getAllByRole('heading', { level: 3 });
     expect(foodItems).toHaveLength(3);
