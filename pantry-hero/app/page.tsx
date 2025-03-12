@@ -7,7 +7,7 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const CATEGORIES = ['Seafood', 'Side', 'Dessert', 'Vegan', 'Starter'];
+const CATEGORIES = ['Seafood', 'Breakfast', 'Vegan'];
 
 interface Recipe {
   idMeal: string;
